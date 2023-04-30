@@ -1,0 +1,38 @@
+-- GUI를 생성합니다.
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.Players.LocalPlayer.PlayerGui
+
+-- 드롭다운 메뉴를 생성합니다.
+local dropdown = Instance.new("Frame")
+dropdown.Size = UDim2.new(0, 100, 0, 30)
+dropdown.BackgroundColor3 = Color3.new(0, 0, 0)
+dropdown.Position = UDim2.new(0.5, -50, 0.5, -15)
+dropdown.Parent = gui
+
+-- 드롭다운 메뉴의 텍스트를 추가합니다.
+local textLabel = Instance.new("TextLabel")
+textLabel.Text = "로블록스 아이템 코드:"
+textLabel.Position = UDim2.new(0, 0, 0, 0)
+textLabel.Size = UDim2.new(1, 0, 0.5, 0)
+textLabel.Parent = dropdown
+
+-- 텍스트 박스를 추가합니다.
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(1, 0, 0.5, 0)
+textBox.Position = UDim2.new(0, 0, 0.5, 0)
+textBox.Parent = dropdown
+
+-- 버튼을 추가합니다.
+local button = Instance.new("TextButton")
+button.Text = "제출"
+button.Size = UDim2.new(1, 0, 0, 30)
+button.Position = UDim2.new(0, 0, 1, 0)
+button.Parent = dropdown
+
+-- 클릭 이벤트를 추가합니다.
+button.MouseButton1Click:Connect(function()
+    local itemId = tonumber(textBox.Text)
+    if itemId then
+        game:GetService("MarketplaceService"):PromptPurchase(game.Players.LocalPlayer, itemId)
+    end
+end)
